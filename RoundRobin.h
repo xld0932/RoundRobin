@@ -1,5 +1,5 @@
 /*
- * RoundRobin V0.1
+ * RoundRobin V0.1.1
  * 
  * MIT License
  * 
@@ -39,8 +39,15 @@ extern "C" {
 #endif
 
 #include <stdio.h>
-#include <stdint.h>
 #include <string.h>
+
+#ifdef __C51__
+typedef unsigned char   uint8_t;
+typedef unsigned int    uint16_t;
+typedef unsigned long   uint32_t;
+#else
+#include <stdint.h>
+#endif
 
 typedef void (* Function)(void);
 
@@ -53,11 +60,11 @@ typedef enum
 
 typedef struct RoundRobin
 {
-    char Name[12];
-    uint32_t Interval;
-    uint32_t RunTick;
-    uint32_t RunFlag;
-    uint32_t RunTime;
+    char Name[10];
+    uint16_t Interval;
+    uint16_t RunTick;
+    uint16_t RunFlag;
+    uint16_t RunTime;
     Function Handler;
     RoundRobin_State State;
     struct RoundRobin *Next;
@@ -67,7 +74,7 @@ typedef struct RoundRobin
 #define RR_BUFFER(NAME)         NAME##_RR_Buffer
 #define RR_BUFFER_DIM(NAME)     NAME##_RR_Buffer[RR_BUFFER_SIZE]
 
-void RoundRobin_AppendTask(char *Name, uint32_t Interval, Function Handler, uint8_t * const RR_Buffer);
+void RoundRobin_AppendTask(char *Name, uint16_t Interval, Function Handler, uint8_t * const RR_Buffer);
 RoundRobin_State RoundRobin_GetState(char *Name);
 void RoundRobin_Suspend(char *Name);
 void RoundRobin_Resume(char *Name);

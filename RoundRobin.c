@@ -1,5 +1,5 @@
 /*
- * RoundRobin V0.1
+ * RoundRobin V0.1.1
  * 
  * MIT License
  * 
@@ -35,7 +35,7 @@
 
 RoundRobin_TypeDef *Head = NULL;
 
-void RoundRobin_AppendTask(char *Name, uint32_t Interval, Function Handler, uint8_t * const RR_Buffer)
+void RoundRobin_AppendTask(char *Name, uint16_t Interval, Function Handler, uint8_t * const RR_Buffer)
 {
     RoundRobin_TypeDef *Node = Head;
 
@@ -186,7 +186,7 @@ void RoundRobin_List(void)
 {
     RoundRobin_TypeDef *Node = Head;
 
-    printf("\r\n\r\n%s :", __FUNCTION__);
+    printf("\r\n\r\nRoundRobin List :");
 
     while (Node != NULL)
     {
