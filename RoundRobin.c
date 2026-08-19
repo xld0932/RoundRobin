@@ -111,7 +111,9 @@ void RoundRobin_Suspend(char *Name)
     {
         if (strcmp(Node->Name, Name) == 0)
         {
-            Node->State = eSuspend;
+            Node->RunFlag = 0;
+            Node->RunTick = 0;
+            Node->State   = eSuspend;
             break;
         }
 
@@ -127,7 +129,9 @@ void RoundRobin_Resume(char *Name)
     {
         if (strcmp(Node->Name, Name) == 0)
         {
-            Node->State = eRunning;
+            Node->RunFlag = 0;
+            Node->RunTick = 0;
+            Node->State   = eRunning;
             break;
         }
 
@@ -186,8 +190,10 @@ void RoundRobin_List(void)
 {
     RoundRobin_TypeDef *Node = Head;
 
-    printf("\r\n\r\nRoundRobin List :");
+    printf("\r\n");
 
+    printf("\r\nRoundRobin List :");
+    
     while (Node != NULL)
     {
         printf("\r\n%s, %dms", Node->Name, Node->Interval);
